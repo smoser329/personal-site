@@ -1,4 +1,13 @@
-const posts = [
+type Post = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  tag: string;
+  date: string;
+  href?: string;
+};
+
+const posts: Post[] = [
   {
     slug: "custom-games-turned-giants",
     title: "Custom Games That Became Industry Giants",
@@ -37,7 +46,8 @@ const posts = [
     excerpt:
       "Four years at Rutgers School of Engineering taught me more than thermodynamics. The habits, mindsets, and mistakes worth sharing.",
     tag: "Life",
-    date: "Coming soon",
+    date: "Nov 2026",
+    href: "https://claude.ai/artifact/Lh5v7A6pcXC4rCiJD464vo",
   },
   {
     slug: "importance-of-friends",
@@ -66,21 +76,36 @@ export default function Blog() {
           Writing on engineering, leadership, gaming, and figuring out life. Posts dropping soon.
         </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {posts.map((post) => (
-            <div
-              key={post.slug}
-              className="p-6 rounded-xl border border-stone-100 bg-stone-50 flex flex-col gap-3 hover:border-stone-200 hover:shadow-sm transition-all cursor-pointer"
-            >
-              <span
-                className={`text-xs font-semibold px-2.5 py-1 rounded-full self-start ${tagColors[post.tag]}`}
+          {posts.map((post) => {
+            const inner = (
+              <>
+                <span
+                  className={`text-xs font-semibold px-2.5 py-1 rounded-full self-start ${tagColors[post.tag]}`}
+                >
+                  {post.tag}
+                </span>
+                <h3 className="font-semibold text-stone-900 leading-snug">{post.title}</h3>
+                <p className="text-stone-500 text-sm leading-relaxed flex-1">{post.excerpt}</p>
+                <p className="text-stone-300 text-xs">{post.date}</p>
+              </>
+            );
+            const cls = "p-6 rounded-xl border border-stone-100 bg-stone-50 flex flex-col gap-3 hover:border-stone-200 hover:shadow-sm transition-all";
+            return post.href ? (
+              <a
+                key={post.slug}
+                href={post.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cls}
               >
-                {post.tag}
-              </span>
-              <h3 className="font-semibold text-stone-900 leading-snug">{post.title}</h3>
-              <p className="text-stone-500 text-sm leading-relaxed flex-1">{post.excerpt}</p>
-              <p className="text-stone-300 text-xs">{post.date}</p>
-            </div>
-          ))}
+                {inner}
+              </a>
+            ) : (
+              <div key={post.slug} className={`${cls} cursor-pointer`}>
+                {inner}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

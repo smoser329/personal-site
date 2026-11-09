@@ -5,7 +5,7 @@ export default function Footer() {
         <p className="text-stone-400 text-sm">© 2026 Samuel Moser</p>
         <div className="flex items-center gap-6">
           <a
-            href="https://linkedin.com/in/samuelmoser"
+            href="https://www.linkedin.com/in/samuel-moser-4737aa12b/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-stone-400 hover:text-stone-700 transition-colors text-sm"
