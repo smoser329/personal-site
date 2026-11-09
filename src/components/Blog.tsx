@@ -47,7 +47,7 @@ const posts: Post[] = [
       "Four years at Rutgers School of Engineering taught me more than thermodynamics. The habits, mindsets, and mistakes worth sharing.",
     tag: "Life",
     date: "Nov 2026",
-    href: "https://claude.ai/artifact/Lh5v7A6pcXC4rCiJD464vo",
+    href: "/blog/college-survival-guide",
   },
   {
     slug: "importance-of-friends",
@@ -94,8 +94,6 @@ export default function Blog() {
               <a
                 key={post.slug}
                 href={post.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 className={cls}
               >
                 {inner}
