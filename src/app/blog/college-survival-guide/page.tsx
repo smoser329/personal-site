@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Engineering School Survival Guide — Samuel Moser",
@@ -30,6 +31,23 @@ export default function CollegeSurvivalGuide() {
             Things I wish someone told me before my first semester — and what actually worked.
           </p>
           <p className="mt-2 text-stone-400 text-sm">November 2026</p>
+        </div>
+
+        <div className="mb-12 -mx-6 md:mx-0 md:rounded-xl overflow-hidden shadow-md">
+          <div className="relative w-full h-64 md:h-80">
+            <Image
+              src="/rutgers-orientation.jpg"
+              alt="Samuel Moser at Rutgers orientation with the Scarlet Knight mascot"
+              fill
+              className="object-cover"
+              style={{ objectPosition: "center 30%" }}
+            />
+          </div>
+          <div className="px-4 py-2 bg-stone-50 border-t border-stone-100">
+            <p className="text-xs text-stone-400 text-center">
+              Day one at Rutgers. Didn&apos;t know anyone. Turned out okay.
+            </p>
+          </div>
         </div>
 
         <div className="prose prose-stone max-w-none">
