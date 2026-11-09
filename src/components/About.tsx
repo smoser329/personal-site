@@ -34,7 +34,8 @@ export default function About() {
                   src="/samuel-ac130.jpg"
                   alt="Samuel Moser in front of AC-130 at Lockheed Martin Marietta"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover"
+                  style={{ objectPosition: "center 10%" }}
                 />
               </div>
               <div className="p-3 bg-stone-50 border-t border-stone-100">

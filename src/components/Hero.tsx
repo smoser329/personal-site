@@ -49,7 +49,8 @@ export default function Hero() {
                 src="/samuel.jpg"
                 alt="Samuel Moser"
                 fill
-                className="object-cover object-top"
+                className="object-cover"
+                style={{ objectPosition: "center 15%" }}
                 priority
               />
             </div>

@@ -58,7 +58,8 @@ export default function Life() {
                 src="/snowboarding.jpg"
                 alt="Samuel Moser snowboarding above the clouds"
                 fill
-                className="object-cover object-center"
+                className="object-cover"
+                style={{ objectPosition: "center 20%" }}
               />
             </div>
             <div className="p-2 bg-stone-50 border-t border-stone-100">
