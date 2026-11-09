@@ -9,6 +9,15 @@ type Post = {
 
 const posts: Post[] = [
   {
+    slug: "college-survival-guide",
+    title: "Engineering School Survival Guide",
+    excerpt:
+      "Four years at Rutgers School of Engineering taught me more than thermodynamics. The habits, mindsets, and mistakes worth sharing.",
+    tag: "Life",
+    date: "Nov 2026",
+    href: "/blog/college-survival-guide",
+  },
+  {
     slug: "custom-games-turned-giants",
     title: "Custom Games That Became Industry Giants",
     excerpt:
@@ -39,15 +48,6 @@ const posts: Post[] = [
       "No office, no built-in social network, no excuses. What I learned from relocating to Miami about building community from scratch.",
     tag: "Life",
     date: "Coming soon",
-  },
-  {
-    slug: "college-survival-guide",
-    title: "Engineering School Survival Guide",
-    excerpt:
-      "Four years at Rutgers School of Engineering taught me more than thermodynamics. The habits, mindsets, and mistakes worth sharing.",
-    tag: "Life",
-    date: "Nov 2026",
-    href: "/blog/college-survival-guide",
   },
   {
     slug: "tech-job-survival-guide",
@@ -93,19 +93,34 @@ export default function Blog() {
         </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {posts.map((post) => {
+            const published = !!post.href;
             const inner = (
               <>
-                <span
-                  className={`text-xs font-semibold px-2.5 py-1 rounded-full self-start ${tagColors[post.tag]}`}
-                >
-                  {post.tag}
-                </span>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span
+                    className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColors[post.tag]}`}
+                  >
+                    {post.tag}
+                  </span>
+                  {published && (
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600">
+                      Published
+                    </span>
+                  )}
+                </div>
                 <h3 className="font-semibold text-stone-900 leading-snug">{post.title}</h3>
                 <p className="text-stone-500 text-sm leading-relaxed flex-1">{post.excerpt}</p>
-                <p className="text-stone-300 text-xs">{post.date}</p>
+                <div className="flex items-center justify-between">
+                  <p className={`text-xs ${published ? "text-stone-400" : "text-stone-300"}`}>{post.date}</p>
+                  {published && (
+                    <span className="text-xs font-medium text-sky-500">Read →</span>
+                  )}
+                </div>
               </>
             );
-            const cls = "p-6 rounded-xl border border-stone-100 bg-stone-50 flex flex-col gap-3 hover:border-stone-200 hover:shadow-sm transition-all";
+            const cls = published
+              ? "p-6 rounded-xl border border-stone-200 bg-white flex flex-col gap-3 hover:border-sky-200 hover:shadow-md transition-all"
+              : "p-6 rounded-xl border border-stone-100 bg-stone-50 flex flex-col gap-3 hover:border-stone-200 hover:shadow-sm transition-all";
             return post.href ? (
               <a
                 key={post.slug}
