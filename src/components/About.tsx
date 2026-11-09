@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function About() {
   return (
     <section id="about" className="py-24 bg-white">
@@ -8,44 +10,60 @@ export default function About() {
             <h2 className="text-3xl font-bold text-stone-900 mb-5">Engineer by training,<br />builder by nature.</h2>
             <p className="text-stone-600 leading-relaxed mb-4">
               I studied Mechanical Engineering with an Aerospace concentration at Rutgers School
-              of Engineering, graduating in 2021. The blend of systems thinking, physics, and
-              problem-solving I developed there shapes how I approach software every day.
+              of Engineering, graduating in 2021 with a 3.64 GPA and Dean&apos;s List honors.
+              The systems thinking and analytical rigor I developed there shapes how I approach
+              software every day.
+            </p>
+            <p className="text-stone-600 leading-relaxed mb-4">
+              What started as a summer internship in 2019 turned into a career defined by
+              curiosity and continuous growth — from using AI to enhance Ballistic Missile Defense
+              classifiers, to co-creating LM&apos;s Sensor Data Fusion Test Bed, to now leading
+              a suite of six enterprise web applications as the Lean Agile Center of Excellence
+              Lead Developer.
             </p>
             <p className="text-stone-600 leading-relaxed">
-              What started as a 2019 internship at Lockheed Martin turned into a career defined
-              by curiosity and growth — from testing naval weapons systems to leading a team of
-              engineers building internal platforms used across the enterprise.
+              I&apos;m a certified DevSecOps Engineer, Scrum Product Owner, and Kubernetes Cloud
+              Native Associate. Outside of shipping software I mentor 10+ interns each year and
+              advocate for Agile principles across a 3,000+ person program.
             </p>
           </div>
-          <div className="space-y-6">
-            <div className="p-6 rounded-xl border border-stone-100 bg-stone-50">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <svg className="w-5 h-5 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div className="space-y-5">
+            <div className="rounded-xl overflow-hidden shadow-lg">
+              <div className="relative w-full h-52">
+                <Image
+                  src="/samuel-ac130.jpg"
+                  alt="Samuel Moser in front of AC-130 at Lockheed Martin Marietta"
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
+              <div className="p-3 bg-stone-50 border-t border-stone-100">
+                <p className="text-xs text-stone-400 text-center">At the C-130J Super Hercules facility, Marietta, GA</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-5 rounded-xl border border-stone-100 bg-stone-50">
+                <div className="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center mb-3">
+                  <svg className="w-4 h-4 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6" />
                   </svg>
                 </div>
-                <div>
-                  <p className="font-semibold text-stone-900">Rutgers School of Engineering</p>
-                  <p className="text-stone-500 text-sm">B.S. Mechanical Engineering · Aerospace Concentration</p>
-                  <p className="text-stone-400 text-sm">New Brunswick, NJ · Class of 2021</p>
-                </div>
+                <p className="font-semibold text-stone-900 text-sm">Rutgers Engineering</p>
+                <p className="text-stone-500 text-xs mt-0.5">B.S. Mechanical Engineering</p>
+                <p className="text-stone-400 text-xs">Aerospace · GPA 3.64 · 2021</p>
+                <p className="text-stone-400 text-xs mt-1">Kappa Sigma · Dean&apos;s List</p>
               </div>
-            </div>
-            <div className="p-6 rounded-xl border border-stone-100 bg-stone-50">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <svg className="w-5 h-5 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              <div className="p-5 rounded-xl border border-stone-100 bg-stone-50">
+                <div className="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center mb-3">
+                  <svg className="w-4 h-4 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                   </svg>
                 </div>
-                <div>
-                  <p className="font-semibold text-stone-900">Miami, FL</p>
-                  <p className="text-stone-500 text-sm">Currently based in South Florida</p>
-                  <p className="text-stone-400 text-sm">Working fully remote</p>
-                </div>
+                <p className="font-semibold text-stone-900 text-sm">Certifications</p>
+                <p className="text-stone-400 text-xs mt-1">DevSecOps Engineer</p>
+                <p className="text-stone-400 text-xs">Kubernetes CNA</p>
+                <p className="text-stone-400 text-xs">Scrum PO · DOL Apprenticeship</p>
               </div>
             </div>
           </div>

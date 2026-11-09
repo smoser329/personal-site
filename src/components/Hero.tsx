@@ -12,9 +12,13 @@ export default function Hero() {
             <h1 className="text-5xl md:text-6xl font-bold text-stone-900 leading-tight mb-5">
               Samuel<br />Moser
             </h1>
-            <p className="text-lg text-stone-600 leading-relaxed max-w-lg mb-8">
-              Staff Software Engineer driving organizational agility at Lockheed Martin —
-              through the products I ship, the engineers I mentor, and the culture I help build.
+            <p className="text-lg text-stone-600 leading-relaxed max-w-lg mb-3">
+              Software Engineer IV at Lockheed Martin — building AI-powered web applications
+              for agile teams, leading DevSecOps transformation, and mentoring the next
+              generation of engineers.
+            </p>
+            <p className="text-sm text-stone-400 leading-relaxed max-w-lg mb-8">
+              Lean Agile CoE Lead Developer · Sensor Data Fusion Test Bed co-creator
             </p>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
               <a
@@ -28,6 +32,14 @@ export default function Hero() {
                 className="px-5 py-2.5 border border-stone-300 text-stone-700 text-sm font-medium rounded-lg hover:border-stone-500 transition-colors"
               >
                 Read the Blog
+              </a>
+              <a
+                href="https://www.linkedin.com/in/samuel-moser-4737aa12b/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 border border-stone-300 text-stone-700 text-sm font-medium rounded-lg hover:border-stone-500 transition-colors"
+              >
+                LinkedIn
               </a>
             </div>
           </div>

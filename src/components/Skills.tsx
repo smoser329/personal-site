@@ -1,23 +1,27 @@
 const categories = [
   {
     label: "Languages",
-    skills: ["TypeScript", "JavaScript", "Python", "C#"],
+    skills: ["TypeScript", "JavaScript", "Python", "C#", "MATLAB"],
   },
   {
     label: "Frontend",
-    skills: ["Next.js", "React", "Tailwind CSS", "Figma"],
+    skills: ["Next.js", "React", "Tailwind CSS", "Tableau", "Figma"],
   },
   {
     label: "Backend & Data",
-    skills: [".NET Framework", "Prisma", "PostgreSQL", "MySQL"],
+    skills: [".NET Framework", "FastAPI", "Prisma", "PostgreSQL", "MySQL", "GraphQL"],
   },
   {
-    label: "Infrastructure",
-    skills: ["Tanzu Application Services", "Traefik", "Vercel"],
+    label: "DevSecOps",
+    skills: ["GitLab CI/CD", "Docker", "Kubernetes", "AWS", "Tanzu Application Services", "Traefik"],
   },
   {
-    label: "Tooling",
-    skills: ["Claude Code", "OpenCode", "Figma Make", "JIRA"],
+    label: "Tooling & AI",
+    skills: ["Claude Code", "OpenCode", "Figma Make", "Metabase", "Airflow"],
+  },
+  {
+    label: "Certifications",
+    skills: ["DevSecOps Engineer (DOL)", "LM Certified DevSecOps", "Kubernetes CNA", "Scrum PO"],
   },
 ];
 
