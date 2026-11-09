@@ -50,7 +50,7 @@ export default function Hero() {
                 alt="Samuel Moser"
                 fill
                 className="object-cover"
-                style={{ objectPosition: "center 15%" }}
+                style={{ objectPosition: "center 5%" }}
                 priority
               />
             </div>

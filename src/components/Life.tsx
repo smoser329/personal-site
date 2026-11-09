@@ -59,7 +59,7 @@ export default function Life() {
                 alt="Samuel Moser snowboarding above the clouds"
                 fill
                 className="object-cover"
-                style={{ objectPosition: "center 20%" }}
+                style={{ objectPosition: "center 70%" }}
               />
             </div>
             <div className="p-2 bg-stone-50 border-t border-stone-100">
