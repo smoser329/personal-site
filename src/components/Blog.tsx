@@ -50,6 +50,22 @@ const posts: Post[] = [
     href: "/blog/college-survival-guide",
   },
   {
+    slug: "tech-job-survival-guide",
+    title: "Tech Job Survival Guide",
+    excerpt:
+      "Landing the job is only the beginning. The unwritten rules, habits, and mindsets that separate engineers who thrive from those who coast.",
+    tag: "Engineering",
+    date: "Coming soon",
+  },
+  {
+    slug: "ultimate-swe-team-setup",
+    title: "The Ultimate SWE Team Setup",
+    excerpt:
+      "Tooling, rituals, and culture decisions that make or break an engineering team. What I'd build from scratch if I were starting a team tomorrow.",
+    tag: "Engineering",
+    date: "Coming soon",
+  },
+  {
     slug: "importance-of-friends",
     title: "The Importance of Friends (Actually)",
     excerpt:
