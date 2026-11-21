@@ -80,8 +80,25 @@ body {
   animation: blink 2.4s ease-in-out infinite;
 }
 
+/* Bug Bash: "+N" numbers floating off the click target */
+@keyframes bugbash-float {
+  from { opacity: 1; transform: translate(-50%, -50%); }
+  to { opacity: 0; transform: translate(-50%, -150%); }
+}
+.bugbash-float {
+  animation: bugbash-float 900ms ease-out forwards;
+}
+@keyframes bugbash-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(217 154 154 / 0); }
+  50% { box-shadow: 0 0 0 6px rgb(217 154 154 / 0.18); }
+}
+.bugbash-pulse {
+  animation: bugbash-pulse 1.6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .blink { animation: none; }
+  .bugbash-pulse { animation: none; }
   .photo { transition: none; }
 }
