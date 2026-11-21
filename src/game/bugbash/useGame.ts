@@ -15,7 +15,7 @@ import {
 } from "./engine";
 import { fmt } from "./format";
 
-const SAVE_KEY = "bugbash-save-v1";
+const SAVE_KEY = "bugbash-save-v2"; // v2: skill tiers were replaced, old saves don't carry over
 const SAVE_EVERY_MS = 10_000;
 const TICK_SECONDS = 0.1; // UI refresh ~10x per second
 const MAX_FRAME_SECONDS = 1; // longer gaps (hidden tab) go through offline credit instead

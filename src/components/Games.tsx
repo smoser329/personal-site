@@ -37,7 +37,7 @@ export default function Games() {
               </div>
               <div className="relative">
                 <p className="font-mono text-xs text-mute mb-3">
-                  <span className="text-dim">$ </span>manual → bash → scripts → ETL → apps → AI
+                  <span className="text-dim">$ </span>manual → bash → scripts → tests → CI/CD → AI
                 </p>
                 <h3 className="font-display text-2xl font-semibold text-fg mb-2">Bug Bash</h3>
                 <p className="text-mute text-sm leading-relaxed max-w-sm">

@@ -10,14 +10,14 @@ export type Skill = {
 };
 
 export const SKILLS: Skill[] = [
-  { id: "bash", name: "Bash one-liners", cost: 15, bps: 0.5, flavor: 'grep -r "TODO" .', verb: "grep'd" },
-  { id: "shell", name: "Shell scripts", cost: 75, bps: 3, flavor: "0 3 * * * ./cleanup.sh", verb: "cron'd away" },
-  { id: "python", name: "Python scripts", cost: 400, bps: 18, flavor: "python parse_logs.py --since 1d", verb: "parsed out" },
-  { id: "etl", name: "ETL pipelines", cost: 2_000, bps: 110, flavor: "extract → transform → load → repeat", verb: "deduplicated" },
-  { id: "testauto", name: "Test automation", cost: 10_000, bps: 650, flavor: "pytest -n auto  # 1,204 passed", verb: "caught" },
-  { id: "mvp", name: "MVP apps", cost: 50_000, bps: 4_000, flavor: "ship it, then iterate", verb: "shipped fixes for" },
-  { id: "fullstack", name: "Full-stack web apps", cost: 250_000, bps: 24_000, flavor: "Next.js ↔ .NET ↔ Postgres", verb: "refactored away" },
-  { id: "cicd", name: "CI/CD & DevSecOps", cost: 1_200_000, bps: 140_000, flavor: "pipeline blocked merge: 0 vulns", verb: "blocked" },
+  { id: "bash", name: "Bash one-liners", cost: 15, bps: 0.5, flavor: 'grep -rn "Exception" logs/', verb: "grep'd" },
+  { id: "shell", name: "Shell scripts", cost: 75, bps: 3, flavor: "./repro.sh --ticket 4521", verb: "reproduced" },
+  { id: "python", name: "Python scripts", cost: 400, bps: 18, flavor: "python triage.py --dedupe", verb: "triaged" },
+  { id: "unit", name: "Unit test suites", cost: 2_000, bps: 110, flavor: "pytest -q  # 412 passed, 3 failed", verb: "caught" },
+  { id: "uitest", name: "UI test automation", cost: 10_000, bps: 650, flavor: "npx playwright test  # checkout flow", verb: "clicked through" },
+  { id: "static", name: "Static analysis", cost: 50_000, bps: 4_000, flavor: "eslint . && mypy src/  # 0 errors", verb: "flagged" },
+  { id: "cicd", name: "CI/CD pipelines", cost: 250_000, bps: 24_000, flavor: "pipeline #2048: all checks passed", verb: "blocked" },
+  { id: "observe", name: "Monitoring & observability", cost: 1_200_000, bps: 140_000, flavor: "alert: error rate > 1% on /checkout", verb: "traced" },
   { id: "ai", name: "AI-assisted coding", cost: 6_000_000, bps: 850_000, flavor: "> fix the flaky test in auth/", verb: "pair-fixed" },
   { id: "swarm", name: "AI agent swarm", cost: 30_000_000, bps: 5_000_000, flavor: "agents: 48 running · 0 waiting on you", verb: "auto-resolved" },
 ];
@@ -54,28 +54,28 @@ const SKILL_UPGRADES: Record<string, [Named, Named]> = {
     { name: "Scheduled health checks", why: "Cron jobs catch failing services before users notice." },
   ],
   python: [
-    { name: "Unit tests", why: "Every fix gets a test, so the bug can't come back." },
-    { name: "Type hints", why: "The type checker flags whole classes of bugs before runtime." },
+    { name: "Regex log parsers", why: "Pull the one stack trace that matters out of a million log lines." },
+    { name: "Auto-deduplicate tickets", why: "Fifty reports of the same crash become one bug with fifty votes." },
   ],
-  etl: [
-    { name: "Data validation rules", why: "Bad records get rejected at the door instead of breaking reports." },
-    { name: "Automated reconciliation", why: "Nightly source-vs-target diffs surface missing and duplicate rows." },
+  unit: [
+    { name: "A test for every fix", why: "Each fixed bug gets a regression test, so it can never come back." },
+    { name: "Code coverage reports", why: "See exactly which code paths no test has ever run." },
   ],
-  testauto: [
-    { name: "Nightly regression suite", why: "Every feature is retested every night, so regressions surface by morning." },
+  uitest: [
+    { name: "Nightly regression suite", why: "Every user flow is retested every night, so regressions surface by morning." },
     { name: "Parallel test runners", why: "Hours of tests finish in minutes, so you run them on every change." },
   ],
-  mvp: [
-    { name: "In-app bug reporting", why: "Users file bugs with screenshots and logs attached." },
-    { name: "Error tracking", why: "Crashes are grouped and reported with a stack trace automatically." },
-  ],
-  fullstack: [
-    { name: "Type-safe API layer", why: "Frontend and backend can't drift out of sync without a compile error." },
-    { name: "Observability dashboards", why: "Traces show exactly which service and line broke." },
+  static: [
+    { name: "Strict type checking", why: "Null and type errors fail the build instead of production." },
+    { name: "Security linters", why: "Injection and secret leaks get flagged as you type." },
   ],
   cicd: [
-    { name: "Shift-left security scans", why: "Vulnerabilities fail the build instead of reaching production." },
+    { name: "Required checks before merge", why: "Nothing merges until every test and scan passes." },
     { name: "Automatic rollbacks", why: "A bad deploy reverts itself in seconds." },
+  ],
+  observe: [
+    { name: "Error tracking", why: "Crashes are grouped and reported with a stack trace automatically." },
+    { name: "Distributed tracing", why: "Follow one request through every service to the exact line that broke." },
   ],
   ai: [
     { name: "AI code review", why: "Every pull request gets a reviewer that has read the whole codebase." },

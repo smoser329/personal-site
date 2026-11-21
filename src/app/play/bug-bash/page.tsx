@@ -5,7 +5,7 @@ import GameLoader from "./GameLoader";
 export const metadata: Metadata = {
   title: "Bug Bash — Samuel Moser",
   description:
-    "A test-engineer clicker game. Fix bugs by hand, then automate: bash, scripts, ETLs, apps, CI/CD, and AI. Win in about five minutes.",
+    "A test-engineer clicker game. Fix bugs by hand, then automate: bash, scripts, tests, static analysis, CI/CD, monitoring and AI. Win in about five minutes.",
 };
 
 export default function BugBashPage() {
@@ -28,7 +28,7 @@ export default function BugBashPage() {
             <h1 className="mt-2 font-display text-4xl md:text-5xl font-semibold tracking-tight text-fg">Bug Bash</h1>
           </div>
           <p className="text-fg-2 text-sm max-w-md leading-relaxed">
-            Start by fixing bugs by hand. Spend them learning bash, scripts, ETLs, apps and AI until the bugs fix
+            Start by fixing bugs by hand. Spend them learning bash, scripts, test suites, CI/CD, monitoring and AI until the bugs fix
             themselves. Deploy an <span className="text-amber">AI agent swarm</span> to win.
           </p>
         </div>
