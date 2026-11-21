@@ -4,11 +4,11 @@ import Link from "next/link";
 
 const links = [
   { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Work" },
+  { href: "#skills", label: "Stack" },
   { href: "#life", label: "Life" },
-  { href: "#blog", label: "Blog" },
-  { href: "#games", label: "Games" },
+  { href: "#blog", label: "Writing" },
+  { href: "#games", label: "Play" },
 ];
 
 export default function Nav() {
@@ -17,57 +17,80 @@ export default function Nav() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="#" className="font-semibold text-stone-900 tracking-tight">
-          SM
+    <nav className="fixed top-0 inset-x-0 z-50 px-4 pt-4">
+      <div
+        className={`max-w-5xl mx-auto h-14 px-4 md:px-5 flex items-center justify-between rounded-full border transition-all duration-300 ${
+          scrolled || open
+            ? "bg-panel/80 backdrop-blur-xl border-line shadow-[0_8px_30px_rgb(0_0_0/0.4)]"
+            : "bg-transparent border-transparent"
+        }`}
+      >
+        <Link href="#" className="flex items-center gap-2.5 group">
+          <span className="w-7 h-7 rounded-full border border-line-2 grid place-items-center font-mono text-[11px] text-fg group-hover:border-amber transition-colors">
+            SM
+          </span>
+          <span className="hidden sm:inline text-sm text-fg-2 group-hover:text-fg transition-colors">
+            Samuel Moser
+          </span>
         </Link>
-        <div className="hidden md:flex items-center gap-7">
-          {links.map((l) => (
+        <div className="hidden md:flex items-center gap-1">
+          {links.map((l, i) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-stone-600 hover:text-stone-900 transition-colors"
+              className="px-3 py-1.5 rounded-full text-sm text-mute hover:text-fg hover:bg-panel-2 transition-colors"
             >
+              <span className="font-mono text-[10px] text-dim mr-1.5">0{i + 1}</span>
               {l.label}
             </a>
           ))}
         </div>
+        <a
+          href="mailto:smoser329@gmail.com"
+          className="hidden md:inline-flex items-center gap-2 text-sm text-ink bg-fg hover:bg-amber px-4 py-1.5 rounded-full transition-colors font-medium"
+        >
+          Say hi
+        </a>
         <button
-          className="md:hidden text-stone-700"
+          className="md:hidden text-fg-2 w-9 h-9 grid place-items-center rounded-full hover:bg-panel-2"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
+          aria-expanded={open}
         >
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
             {open ? (
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 8h16M4 16h16" />
             )}
           </svg>
         </button>
       </div>
       {open && (
-        <div className="md:hidden bg-white border-t border-stone-100 px-6 py-4 flex flex-col gap-4">
-          {links.map((l) => (
+        <div className="md:hidden max-w-5xl mx-auto mt-2 rounded-2xl bg-panel/95 backdrop-blur-xl border border-line p-2 flex flex-col">
+          {links.map((l, i) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-stone-700"
+              className="px-4 py-3 rounded-xl text-fg-2 hover:bg-panel-2 hover:text-fg flex items-center gap-3"
               onClick={() => setOpen(false)}
             >
+              <span className="font-mono text-[11px] text-dim">0{i + 1}</span>
               {l.label}
             </a>
           ))}
+          <a
+            href="mailto:smoser329@gmail.com"
+            className="m-2 mt-1 text-center text-sm text-ink bg-fg px-4 py-2.5 rounded-full font-medium"
+          >
+            Say hi
+          </a>
         </div>
       )}
     </nav>

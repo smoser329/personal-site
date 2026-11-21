@@ -10,47 +10,50 @@ export const metadata: Metadata = {
 
 export default function CollegeSurvivalGuide() {
   return (
-    <div className="min-h-screen bg-white">
-      <header className="border-b border-stone-100">
-        <div className="max-w-2xl mx-auto px-6 h-16 flex items-center">
-          <Link href="/" className="text-sm text-stone-500 hover:text-stone-900 transition-colors">
-            ← Samuel Moser
+    <div className="min-h-screen bg-ink">
+      <header className="sticky top-0 z-40 border-b border-line bg-ink/80 backdrop-blur-xl">
+        <div className="max-w-2xl mx-auto px-6 h-16 flex items-center justify-between">
+          <Link href="/#blog" className="group inline-flex items-center gap-2 text-sm text-mute hover:text-fg transition-colors">
+            <span className="transition-transform group-hover:-translate-x-0.5">←</span>
+            Samuel Moser
           </Link>
+          <span className="font-mono text-[11px] text-dim">12 lessons · 5 min read</span>
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-6 py-16">
-        <div className="mb-10">
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-green-50 text-green-600">
-            Life
-          </span>
-          <h1 className="mt-4 text-4xl font-bold text-stone-900 leading-tight">
+      <main className="max-w-2xl mx-auto px-6 pt-20 pb-28">
+        <div className="mb-12">
+          <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-wider">
+            <span className="text-sage">Life</span>
+            <span className="text-dim">·</span>
+            <span className="text-mute">November 2026</span>
+          </div>
+          <h1 className="mt-6 font-display text-[clamp(2.5rem,7vw,4rem)] font-semibold tracking-[-0.03em] text-fg leading-[1.02]">
             Engineering School Survival Guide
           </h1>
-          <p className="mt-3 text-stone-500">
+          <p className="mt-6 text-xl text-fg-2 leading-relaxed">
             Things I wish someone told me before my first semester — and what actually worked.
           </p>
-          <p className="mt-2 text-stone-400 text-sm">November 2026</p>
         </div>
 
-        <div className="mb-12 -mx-6 md:mx-0 md:rounded-xl overflow-hidden shadow-md">
-          <div className="relative w-full h-64 md:h-80">
+        <figure className="mb-16 -mx-6 md:-mx-16">
+          <div className="relative h-72 md:h-[420px] md:rounded-3xl overflow-hidden border-y md:border border-line bg-panel">
             <Image
               src="/rutgers-orientation.jpg"
               alt="Samuel Moser at Rutgers orientation with the Scarlet Knight mascot"
               fill
-              className="object-cover"
+              sizes="(min-width: 768px) 800px, 100vw"
+              className="photo object-cover"
               style={{ objectPosition: "center 30%" }}
+              priority
             />
           </div>
-          <div className="px-4 py-2 bg-stone-50 border-t border-stone-100">
-            <p className="text-xs text-stone-400 text-center">
-              Day one at Rutgers. Didn&apos;t know anyone. Turned out okay.
-            </p>
-          </div>
-        </div>
+          <figcaption className="mt-3 px-6 md:px-16 font-mono text-[11px] text-dim">
+            Day one at Rutgers. Didn&apos;t know anyone. Turned out okay.
+          </figcaption>
+        </figure>
 
-        <div className="prose prose-stone max-w-none">
+        <div>
 
           <Section n="1" title="Make Friends">
             <p>
@@ -175,14 +178,16 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mb-10">
-      <h2 className="text-xl font-bold text-stone-900 mb-3">
-        <span className="text-stone-300 mr-2 font-normal">{n}.</span>
-        {title}
-      </h2>
-      <div className="text-stone-600 leading-relaxed space-y-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1.5 [&_li]:text-stone-600">
-        {children}
+    <section className="grid grid-cols-[44px_1fr] md:grid-cols-[64px_1fr] py-9 border-t border-line">
+      <span className="font-mono text-sm text-amber pt-1.5">{n.padStart(2, "0")}</span>
+      <div>
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-fg mb-4 leading-snug">
+          {title}
+        </h2>
+        <div className="text-fg-2 text-[17px] leading-[1.75] space-y-4 [&_ul]:space-y-2 [&_ul]:pl-0 [&_li]:relative [&_li]:pl-5 [&_li]:before:content-[''] [&_li]:before:absolute [&_li]:before:left-0 [&_li]:before:top-[0.8em] [&_li]:before:w-2 [&_li]:before:h-px [&_li]:before:bg-mute [&_strong]:text-fg [&_strong]:font-semibold [&_em]:text-fg">
+          {children}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

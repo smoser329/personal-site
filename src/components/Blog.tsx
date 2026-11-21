@@ -1,3 +1,7 @@
+import Link from "next/link";
+import Image from "next/image";
+import SectionHeader from "./SectionHeader";
+
 type Post = {
   slug: string;
   title: string;
@@ -5,6 +9,7 @@ type Post = {
   tag: string;
   date: string;
   href?: string;
+  image?: string;
 };
 
 const posts: Post[] = [
@@ -16,6 +21,7 @@ const posts: Post[] = [
     tag: "Life",
     date: "Nov 2026",
     href: "/blog/college-survival-guide",
+    image: "/rutgers-orientation.jpg",
   },
   {
     slug: "custom-games-turned-giants",
@@ -75,67 +81,87 @@ const posts: Post[] = [
   },
 ];
 
-const tagColors: Record<string, string> = {
-  Gaming: "bg-purple-50 text-purple-600",
-  Engineering: "bg-sky-50 text-sky-600",
-  Leadership: "bg-amber-50 text-amber-600",
-  Life: "bg-green-50 text-green-600",
+export const tagColors: Record<string, string> = {
+  Gaming: "text-lilac",
+  Engineering: "text-sky",
+  Leadership: "text-amber",
+  Life: "text-sage",
 };
 
 export default function Blog() {
+  const published = posts.filter((p) => p.href);
+  const upcoming = posts.filter((p) => !p.href);
+
   return (
-    <section id="blog" className="py-24 bg-white">
+    <section id="blog" className="py-28">
       <div className="max-w-5xl mx-auto px-6">
-        <p className="text-sky-500 font-medium text-sm tracking-widest uppercase mb-3">Blog</p>
-        <h2 className="text-3xl font-bold text-stone-900 mb-4">Things I think about</h2>
-        <p className="text-stone-500 mb-12 max-w-xl">
-          Writing on engineering, leadership, gaming, and figuring out life. Posts dropping soon.
-        </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {posts.map((post) => {
-            const published = !!post.href;
-            const inner = (
-              <>
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span
-                    className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColors[post.tag]}`}
-                  >
-                    {post.tag}
-                  </span>
-                  {published && (
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600">
-                      Published
-                    </span>
-                  )}
-                </div>
-                <h3 className="font-semibold text-stone-900 leading-snug">{post.title}</h3>
-                <p className="text-stone-500 text-sm leading-relaxed flex-1">{post.excerpt}</p>
-                <div className="flex items-center justify-between">
-                  <p className={`text-xs ${published ? "text-stone-400" : "text-stone-300"}`}>{post.date}</p>
-                  {published && (
-                    <span className="text-xs font-medium text-sky-500">Read →</span>
-                  )}
-                </div>
-              </>
-            );
-            const cls = published
-              ? "p-6 rounded-xl border border-stone-200 bg-white flex flex-col gap-3 hover:border-sky-200 hover:shadow-md transition-all"
-              : "p-6 rounded-xl border border-stone-100 bg-stone-50 flex flex-col gap-3 hover:border-stone-200 hover:shadow-sm transition-all";
-            return post.href ? (
-              <a
-                key={post.slug}
-                href={post.href}
-                className={cls}
-              >
-                {inner}
-              </a>
-            ) : (
-              <div key={post.slug} className={`${cls} cursor-pointer`}>
-                {inner}
+        <SectionHeader
+          index="05"
+          label="Writing"
+          title="Things I think about"
+          intro="Writing on engineering, leadership, gaming, and figuring out life."
+        />
+
+        {published.map((post) => (
+          <Link
+            key={post.slug}
+            href={post.href!}
+            className="group grid md:grid-cols-[1fr_1.1fr] rounded-3xl overflow-hidden border border-line bg-panel hover:border-line-2 transition-colors mb-14"
+          >
+            {post.image && (
+              <div className="relative h-56 md:h-auto min-h-[280px] overflow-hidden">
+                <Image
+                  src={post.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 768px) 460px, 100vw"
+                  className="photo object-cover group-hover:scale-[1.03]"
+                  style={{ objectPosition: "center 30%" }}
+                />
               </div>
-            );
-          })}
+            )}
+            <div className="p-8 md:p-10 flex flex-col">
+              <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-wider">
+                <span className="text-amber">Latest</span>
+                <span className="text-dim">·</span>
+                <span className={tagColors[post.tag]}>{post.tag}</span>
+                <span className="text-dim">·</span>
+                <span className="text-mute">{post.date}</span>
+              </div>
+              <h3 className="mt-5 font-display text-3xl md:text-4xl font-semibold tracking-tight text-fg leading-[1.1]">
+                {post.title}
+              </h3>
+              <p className="mt-4 text-fg-2 leading-relaxed">{post.excerpt}</p>
+              <span className="mt-auto pt-8 inline-flex items-center gap-2 text-sm font-medium text-fg group-hover:text-amber transition-colors">
+                Read the post
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </span>
+            </div>
+          </Link>
+        ))}
+
+        <div className="flex items-center gap-4 mb-2">
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-mute">In the hangar</span>
+          <span className="h-px flex-1 bg-line" />
+          <span className="font-mono text-xs text-dim">{upcoming.length} drafts</span>
         </div>
+        <ul>
+          {upcoming.map((post) => (
+            <li
+              key={post.slug}
+              className="grid md:grid-cols-[120px_1fr_auto] gap-x-8 gap-y-2 py-6 border-b border-line items-baseline"
+            >
+              <span className={`font-mono text-[11px] uppercase tracking-wider ${tagColors[post.tag]}`}>
+                {post.tag}
+              </span>
+              <div>
+                <h3 className="font-medium text-fg-2 text-lg leading-snug">{post.title}</h3>
+                <p className="mt-1.5 text-mute text-sm leading-relaxed max-w-2xl">{post.excerpt}</p>
+              </div>
+              <span className="font-mono text-[11px] text-dim whitespace-nowrap">Soon</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

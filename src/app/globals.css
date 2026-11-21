@@ -1,22 +1,87 @@
 @import "tailwindcss";
 
-:root {
-  --background: #fafaf9;
-  --foreground: #1c1917;
-  --muted: #78716c;
-  --accent: #0ea5e9;
-  --accent-dark: #0284c7;
-  --border: #e7e5e4;
-  --card: #ffffff;
+/*
+  "Night flight" palette — a dark cockpit, not an inverted page.
+  Warm near-black surfaces, warm off-white type, one amber instrument light.
+*/
+@theme {
+  --color-ink: #0b0c0e;        /* page */
+  --color-ink-2: #111215;      /* recessed band */
+  --color-panel: #15171a;      /* raised surface */
+  --color-panel-2: #1c1e22;    /* hover / inset */
+  --color-line: #24262b;       /* hairlines */
+  --color-line-2: #34373d;     /* stronger hairlines */
+  --color-fg: #ece7de;         /* primary text */
+  --color-fg-2: #b4afa6;       /* body text */
+  --color-mute: #807c75;       /* secondary text */
+  --color-dim: #57544f;        /* tertiary / disabled */
+  --color-amber: #f3a83b;      /* accent */
+  --color-amber-soft: #f3a83b1f;
+  --color-sage: #8fbf9f;
+  --color-sky: #7fb4d6;
+  --color-rose: #d99a9a;
+  --color-lilac: #b3a3d9;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter-tight), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  -webkit-font-smoothing: antialiased;
+:root {
+  color-scheme: dark;
 }
 
 html {
   scroll-behavior: smooth;
+  background: var(--color-ink);
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-amber);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Faint engineering grid used behind the hero */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Photos are bright; settle them into the dark page, wake them on hover */
+.photo {
+  filter: saturate(0.85) brightness(0.88);
+  transition: filter 500ms ease, transform 700ms ease;
+}
+.group:hover .photo {
+  filter: saturate(1) brightness(1);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+.blink {
+  animation: blink 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .blink { animation: none; }
+  .photo { transition: none; }
 }

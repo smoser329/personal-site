@@ -38,11 +38,11 @@ export default function SnakeGame() {
     if (!ctx) return;
     const s = stateRef.current;
 
-    ctx.fillStyle = "#1c1917";
+    ctx.fillStyle = "#0b0c0e";
     ctx.fillRect(0, 0, W, H);
 
     // grid dots
-    ctx.fillStyle = "#292524";
+    ctx.fillStyle = "#24262b";
     for (let x = 0; x < COLS; x++) {
       for (let y = 0; y < ROWS; y++) {
         ctx.beginPath();
@@ -53,7 +53,7 @@ export default function SnakeGame() {
 
     // food
     const f = s.food;
-    ctx.fillStyle = "#0ea5e9";
+    ctx.fillStyle = "#f3a83b";
     ctx.beginPath();
     ctx.arc(f.x * CELL + CELL / 2, f.y * CELL + CELL / 2, CELL / 2 - 2, 0, Math.PI * 2);
     ctx.fill();
@@ -61,7 +61,7 @@ export default function SnakeGame() {
     // snake
     s.snake.forEach((seg, i) => {
       const alpha = 0.6 + 0.4 * (i === 0 ? 1 : (s.snake.length - i) / s.snake.length);
-      ctx.fillStyle = i === 0 ? `rgba(14,165,233,${alpha})` : `rgba(56,189,248,${alpha * 0.7})`;
+      ctx.fillStyle = i === 0 ? `rgba(236,231,222,${alpha})` : `rgba(180,175,166,${alpha * 0.75})`;
       const pad = i === 0 ? 1 : 2;
       ctx.beginPath();
       ctx.roundRect(seg.x * CELL + pad, seg.y * CELL + pad, CELL - pad * 2, CELL - pad * 2, 4);
@@ -180,23 +180,23 @@ export default function SnakeGame() {
           ref={canvasRef}
           width={W}
           height={H}
-          className="rounded-xl border border-stone-700"
+          className="rounded-2xl border border-line"
           style={{ maxWidth: "100%", display: "block" }}
         />
         {status !== "playing" && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-stone-900/80 backdrop-blur-sm">
+          <div className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-ink/80 backdrop-blur-sm">
             {status === "dead" && (
-              <p className="text-stone-300 text-lg font-semibold mb-1">Game Over</p>
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-mute mb-2">Game Over</p>
             )}
             {status === "dead" && (
-              <p className="text-sky-400 text-2xl font-bold mb-5">Score: {score}</p>
+              <p className="font-display text-4xl font-semibold text-fg mb-6">Score: {score}</p>
             )}
             {status === "idle" && (
-              <p className="text-stone-300 text-sm mb-5">Use arrow keys or WASD</p>
+              <p className="font-mono text-xs text-mute mb-5">Use arrow keys or WASD</p>
             )}
             <button
               onClick={start}
-              className="px-6 py-2.5 bg-sky-500 hover:bg-sky-400 text-white text-sm font-semibold rounded-lg transition-colors"
+              className="px-6 py-2.5 bg-amber hover:bg-fg text-ink text-sm font-semibold rounded-full transition-colors"
             >
               {status === "dead" ? "Play Again" : "Start Game"}
             </button>
@@ -204,8 +204,8 @@ export default function SnakeGame() {
         )}
       </div>
       {status === "playing" && (
-        <p className="text-stone-400 text-sm">
-          Score: <span className="text-sky-400 font-bold">{score}</span>
+        <p className="font-mono text-xs text-mute">
+          Score: <span className="text-amber">{score}</span>
         </p>
       )}
     </div>
