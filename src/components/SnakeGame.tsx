@@ -26,7 +26,9 @@ export default function SnakeGame() {
     started: false,
   });
   const [score, setScore] = useState(0);
-  const [status, setStatus] = useState<"idle" | "playing" | "dead">("idle");
+  const [status, setStatus] = useState<"idle" | "countdown" | "playing" | "dead">("idle");
+  const [count, setCount] = useState(3);
+  const countdownRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   const rafRef = useRef<number>(0);
   const lastTickRef = useRef<number>(0);
   const SPEED = 120;
@@ -111,19 +113,43 @@ export default function SnakeGame() {
 
   const start = useCallback(() => {
     const s = stateRef.current;
-    s.snake = [{ x: 10, y: 10 }];
-    s.dir = { x: 1, y: 0 };
-    s.next = { x: 1, y: 0 };
-    s.food = rand();
-    s.score = 0;
+    s.dir = s.next; // direction picked during the countdown
     s.alive = true;
     s.started = true;
-    setScore(0);
     setStatus("playing");
     lastTickRef.current = 0;
     cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(tick);
   }, [tick]);
+
+  // Reset the board, then count 3-2-1 before the snake starts moving.
+  const beginCountdown = useCallback(() => {
+    if (countdownRef.current.length) return;
+    const s = stateRef.current;
+    s.snake = [{ x: 10, y: 10 }];
+    s.dir = { x: 1, y: 0 };
+    s.next = { x: 1, y: 0 };
+    s.food = rand();
+    s.score = 0;
+    s.alive = false;
+    setScore(0);
+    setCount(3);
+    setStatus("countdown");
+    cancelAnimationFrame(rafRef.current);
+    draw();
+    const step = 700;
+    countdownRef.current = [
+      setTimeout(() => setCount(2), step),
+      setTimeout(() => setCount(1), step * 2),
+      setTimeout(() => setCount(0), step * 3),
+      setTimeout(() => {
+        countdownRef.current = [];
+        start();
+      }, step * 3 + 450),
+    ];
+  }, [draw, start]);
+
+  useEffect(() => () => countdownRef.current.forEach(clearTimeout), []);
 
   useEffect(() => {
     draw();
@@ -147,11 +173,14 @@ export default function SnakeGame() {
         if (nd.x !== -s.dir.x || nd.y !== -s.dir.y) s.next = nd;
         e.preventDefault();
       }
-      if ((e.key === " " || e.key === "Enter") && !s.alive) start();
+      if ((e.key === " " || e.key === "Enter") && !s.alive) {
+        e.preventDefault();
+        beginCountdown();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [start]);
+  }, [beginCountdown]);
 
   // touch controls
   const touchStart = useRef<{ x: number; y: number } | null>(null);
@@ -183,7 +212,15 @@ export default function SnakeGame() {
           className="rounded-2xl border border-line"
           style={{ maxWidth: "100%", display: "block" }}
         />
-        {status !== "playing" && (
+        {status === "countdown" && (
+          <div className="absolute inset-0 flex flex-col items-center justify-start pt-[12%] rounded-2xl bg-ink/40 pointer-events-none" aria-live="assertive">
+            <span key={count} className="snake-count font-display text-7xl font-semibold text-fg">
+              {count > 0 ? count : <span className="text-amber">Go!</span>}
+            </span>
+            {count > 0 && <p className="mt-3 font-mono text-[11px] text-mute">Pick a direction</p>}
+          </div>
+        )}
+        {(status === "idle" || status === "dead") && (
           <div className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-ink/80 backdrop-blur-sm">
             {status === "dead" && (
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-mute mb-2">Game Over</p>
@@ -195,7 +232,7 @@ export default function SnakeGame() {
               <p className="font-mono text-xs text-mute mb-5">Use arrow keys or WASD</p>
             )}
             <button
-              onClick={start}
+              onClick={beginCountdown}
               className="px-6 py-2.5 bg-amber hover:bg-fg text-ink text-sm font-semibold rounded-full transition-colors"
             >
               {status === "dead" ? "Play Again" : "Start Game"}

@@ -80,6 +80,16 @@ body {
   animation: blink 2.4s ease-in-out infinite;
 }
 
+/* Snake: 3-2-1 countdown pop */
+@keyframes snake-count {
+  from { opacity: 0; transform: scale(1.6); }
+  to { opacity: 1; transform: scale(1); }
+}
+.snake-count {
+  display: inline-block;
+  animation: snake-count 300ms ease-out;
+}
+
 /* Bug Bash: "+N" numbers floating off the click target */
 @keyframes bugbash-float {
   from { opacity: 1; transform: translate(-50%, -50%); }
